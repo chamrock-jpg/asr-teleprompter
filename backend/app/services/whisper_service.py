@@ -1,3 +1,5 @@
+from typing import Optional
+
 from faster_whisper import WhisperModel
 import numpy as np
 
@@ -6,7 +8,7 @@ from app.config import settings
 
 class WhisperService:
     def __init__(self) -> None:
-        self.model: WhisperModel | None = None
+        self.model: Optional[WhisperModel] = None
         self.model_name: str = ""
         self.device_info: str = ""
 

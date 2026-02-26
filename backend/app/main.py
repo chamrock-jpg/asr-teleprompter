@@ -1,6 +1,6 @@
 import logging
 from contextlib import asynccontextmanager
-from collections.abc import AsyncGenerator
+from typing import AsyncGenerator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,7 +16,7 @@ whisper_service = WhisperService()
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     logger.info(
         "Loading Whisper model: %s (device=%s, compute=%s)",
         settings.model_size,

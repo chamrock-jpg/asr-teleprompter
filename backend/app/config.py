@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic_settings import BaseSettings
 
 
@@ -8,7 +10,7 @@ class Settings(BaseSettings):
     sample_rate: int = 16000
     chunk_duration_ms: int = 2000
     chunk_overlap_ms: int = 500
-    language: str | None = None
+    language: Optional[str] = None
     host: str = "0.0.0.0"
     port: int = 8000
 
