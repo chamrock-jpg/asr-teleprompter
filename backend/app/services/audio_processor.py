@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class AudioProcessor:
     """Manages an audio buffer that accumulates WebSocket chunks.
 
@@ -20,7 +23,7 @@ class AudioProcessor:
         self.chunk_size = int(sample_rate * chunk_seconds * 2)
         self.overlap_size = int(sample_rate * overlap_seconds * 2)
 
-    def add_audio(self, data: bytes) -> bytes | None:
+    def add_audio(self, data: bytes) -> Optional[bytes]:
         """Add audio data. Returns a chunk ready for transcription, or None."""
         self.buffer.extend(data)
         if len(self.buffer) >= self.chunk_size:
@@ -29,7 +32,7 @@ class AudioProcessor:
             return chunk
         return None
 
-    def flush(self) -> bytes | None:
+    def flush(self) -> Optional[bytes]:
         """Return remaining audio in buffer if there's enough."""
         if len(self.buffer) > self.sample_rate:  # At least 0.5s
             chunk = bytes(self.buffer)
